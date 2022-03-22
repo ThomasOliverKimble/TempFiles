@@ -5,7 +5,7 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 </style>
-<rect id="Line" x="177" y="181" class="st0" width="21" height="150"/>
-<polygon id="triangleL" class="st0" points="327,331 327,181 177,256 "/>
-<polygon id="triangleR" class="st0" points="462,331 462,181 312,256 "/>
+<rect id="Line" x="102" y="156" class="st0" width="28" height="200"/>
+<polygon id="triangleL" class="st0" points="302,356 302,156 102,256 "/>
+<polygon id="triangleR" class="st0" points="482,356 482,156 282,256 "/>
 </svg>
