@@ -1,0 +1,563 @@
+Week 5:
+
+Webots JS:
+
+Finalised toolbar layout and design:
+  - New icons and animations for each button
+  - Aligned and smooth transitions on tooltips
+  - Darker toolbar for simulations
+  - Gradient for animations and scenes -> looks good
+  - Modified red buttons to match Vscode blue (still not sure, I think I prefered red)
+
+Created Floating Window class
+  - Created new Floating Window class that will also allow for IDE, instructions and robot windows
+  - Merged Benjamins PR on the feature-floating-robot-windows branch that allowed theia IDE integration on simulations
+  - Modified layout when IDE is present so that there is no overlap between windows
+
+Bug fixes:
+  - Fixed minor tooltip bugs when transitioning between settings and floating windows
+  - Modified coding style of code and ids so to be consistent with the "-", all is consistent now (but not on webots.cloud)
+
+Webots cloud:
+  - Removed delete button on simulations, simulations only delete on synchronisation when something is wrong
+  - Tested out new layouts and colors with the new Vscode blue to match IDE -> looks good
+  - Imported multiple benchmark simulations with IDE and robot windows -> works well except for motorway with 17 vehicles
+  - Implemented the YAML file parsing and modals with link to wiki when something is wrong with the YAMl file
+  - Tried to allow multiple worlds to be selected in simulation -> was complicated and did not work
+  - Modified github user guide to explain how the webots.yaml file works
+
+For week 6:
+  - Minor bug corrections in floating windows (resize on webots cloud goes out of screen, floating window can be too big when full screen...)
+  - Create PR for all changes (floating windows and toolbar design)
+  - Create PR for webots.cloud modifications
+  - Start implementing robotbenchmark on to webots cloud as we now have theia IDE
+
+World info -> window
+
+
+
+WEEK 6:
+
+Webots JS:
+- Bug corrections with the floating windows: if out of screen during full screen changes -> window disappeared
+- Better behaviour of windows when being resized and dragged -> no pointer events so it doesn't get stuck
+- Toolbar: discussed design choices -> gradient with consistent icons on the right(full screen, settings, info) for scene, animation and simulation
+- Toolbar: changed world selection layout to be consistent with robot windows -> little blue dot
+- Toolbar: modified guide for new buttons
+- Toolbar: merged PR to my floating window branch
+
+Webots Cloud:
+- Finished YAML parsing for dependencies that could be specified in the init section
+- Decided to not include this after discussion -> want to keep yaml file as simple as possible
+- Modified user guide for yaml file -> make note that dependencies should be inside the docker image
+- Tested multiple simulations from the user guide -> not many working due to URL mods, could not find textures on R2022a
+- Implemented new changes in develop on testing branch (PBR appearance modifications, type -> role, type=robot)
+- Noticed compatibility issues -> constraint on webots.cloud -> have to use R2022b or later.
+
+Webots: 
+- Quick mods to html and created simple CSS for web scenes and animations
+- Can be added by uncommenting line in html
+- mods to documentation to consider these changes
+
+RobotBenchmark:
+- Study of how it works behind the scenes
+
+
+For week 7:
+
+- Fix databse issues on testing.cloud
+- Fix failed tests for webots web view CSS
+- Create PR for new features/bug fixes/yaml file testing->beta
+- Add simulations from user guide but with temporary R2022b image and yaml file?
+- Robot benchmark or Loading screen (fix finalize?)
+
+
+Week 7:
+
+Webots Cloud:
+- Fixed database issue and got back working on testing.webots.cloud
+- Created a PR for all previous changes on testing.webots.cloud:
+  - Bug fixes (pagination, overflow when adding)
+  - New synchronisation that deletes when something is wrong
+  - YAML file parsing
+  - New design
+  - Code cleanup
+  --> MERGED
+- Fixed bug when adding scenes/animations after "type/role and version" update --> MERGED
+- Fixed disappearing footer --> MERGED
+- Used the Bulma SASS to create new css file with the correct colors (easily custumizable)
+- Kimberly McGuire lunch -> Created Simulations from the guided tour (working well)
+- Updated OroBOT simulation worlds -> fewer simpler worlds (one very simple, one with two robots, 
+  one with very uneven terrain to show how parameters affect)
+
+Webots JS:
+- Closed PR for floating robot windows (big PR) --> MERGED into develop
+- Fixed small bug in webots clock (caused by wrong id update) --> MERGED
+- A lot of time trying different loading animations/methods for webots JS/cloud progress bar
+  - Each different section has a seperate loading bar (initialisation, connecting to webots instance, starting simulation, finalizing)
+  - Single loading bar for everything -> too slow
+  - image in background -> looks good, but would need to add a screenshot of a scene/animation/simulation to database
+  - Finalizing -> problem because of asynchronous function (no updates in DOM elements)
+  - Continuous loading animation with different prints -> problem because no notion of length/time
+  - Still trying
+Overlay?
+Screenshot during wbproj, hidden file, directly on rawgithubusercontent -> URL
+
+For week 8:
+
+Congé:
+  - Thursday and Tuesday next week off (also friday and monday)
+
+Webots Cloud:
+- cleanup files for testing and beta (infomaniak) DONE
+- add warnings (don't use anything older that R2022b?)
+- add guided tour folder into webots cloud? seperate table?
+- Mobile compatibility? responsiveness?
+
+Webots JS:
+- Finish progress bar/loading screen
+- Fix bug with run button
+
+Webots:
+- Opened PR for adding css to web animation/scene view + simulation view as well after discussion with Daniel
+- Fix upload to webots cloud issue
+
+BUG: when uploading file to webots.cloud from develop on webots app: it does not cancel...
+
+Week 9:
+Update develop documentation with new toolbar (web streaming, animation, simulation)
+
+
+
+Week 9-10:
+
+Webots JS:
+Pas mal de trucs en cours, mais rien de 100% fini:
+- Progress bar: something that is functional and better than before, but not finished
+- Would still like to find a more elegant solution for "finalizing"
+- Noticed that floating windows don't move correctly on mobile -> replaced with library -> working well
+
+Combo:
+- Mobile viewer: fix webots cloud css problems: DONE
+- Mobile viewer: scale toolbar for mobile when min width is too large: DONE
+- Mobile viewer: fix full screen mode and add automatic full screen on rotate: DONE
+- Mobile viewer: removed IDE when screen is too small: DONE
+
+Webots cloud:
+- Investigation on whether scenes/animations delete correctly (after noticing strange scene uploads on webots.cloud) (not finished)
+- Draft: new css with bulm sass (for better customization)
+
+Webots:
+- Noticed bug: -> animation still uploads even after cancel is pressed -> started fixing this.
+
+Week 11: 
+- Contine/finish started tasks (progress bar, mobile viewer, upload cancel bug fix, bulma sass)
+- Talk about robotbenchmark with Olivier
+
+Idea: precompile shaders
+
+add warning to robot windows (with don't remind me again)
+if @cyberbotics email: give admin rights with possibility to delete all scenes/animations/simulations. 
+
+
+Week 11:
+
+Webots JS:
+Finished enhancement of mobile view:
+- Removed previously added library for floating windows
+- Replaced it with my own code based on what I did previously: 8 direction resize + drag -> works well
+- Toolbar scale if too large for screen -> works well
+- Added touch events to floating windows and animation sliders-> works well
+- Added full screen behavior on orientation changes. -> works well
+- Scale panes and panels (settings and info)to fit screen-> works well
+- Minor problems on webots.cloud (white space below screen) -> to be fixed in seperate PR
+
+Webots Cloud:
+- Fixed bug when signing in with existing email -> added uniqueness.php to check if email already exists in database -> merged to beta
+- Gave admin rights to if you have cyberbotics email -> check if your email is correct
+   -> allows to delete if email and password for cyberbotics is correct -> merged to beta
+- Started some CSS fixes that fix white space beneath on bottom of screen
+- Fix other minor CSS issues that Benjamin pointed out during mobile view PR
+- Investigated github collaboration fork ideas for robotbenchmark and webots cloud
+  -> If user forks a private repo, I think the collaborators
+
+Webots:
+- Started Robot window and controller specification redesign -> to be coherant between the two
+  -> Check issue
+- Controller part is almost done, but have slight naming issues (with greater/smaller than symbols) -> would like to find a more elegant solution
+
+Add admin rights for simulations.
+
+Notice: Simulations are smoother without toolbar. -> because of timer refresh. What to do?
+
+
+Week 12:
+
+Webots JS:
+Fixed floating windows: -> merged
+- Made the interact function more understandable
+- Forced cursor and pointer events to different types during interactions -> no close/text selection during movement, no change inside robot windows
+Accredited the OroBot simulation simulation for Daniels article -> merged
+- Noticed bug in toolbar and info pane
+- Fixed bugs introduced with previous web component fix: Information pane and vertical selection pane on toolbar were not working.
+Noticed bug where sometimes simulations were smoother at some times: -> not merged
+- Due to refresh rate of clock in simulations
+- Clock is updated every time step
+- Started investigating solutions to refresh the web elements at less frequent intervals.
+
+Webots Cloud:
+- Give admin rights for simulations -> merged
+- Minor CSS updates: mobile modals, mobile scroll -> not merged
+
+Webots:
+Continued Robot window and controller specifications redesing:
+- Controller: done -> void to <generic>, "" to <none>, <extern>, rename all proto, wbt and default files from void or "" to <generic> and <none>
+- Robot window: generic to <generic>, added <none> feature (not working yet)
+- I thought I introduced some bugs, but after recompiling webots with developed, they were already there:
+    - if a robot window is present (for example fot the Thymio II), it will always reopen on the simulation restart
+    - So I added a checkbox in Tools->Preferences->Network, right underneath where you can select the default browser for robot windows,
+    there is already a checkbox: "Always open in a new window" -> added one allowing users to select "Close robot windows on simulation Reset"
+    Therefore if they want to see the robot window they have to right click and select "Show robot window"
+    - some windows including the previous "generic_window" never work.
+    - if a "non-working" window was selected, no other one could be selected.
+- Currently fixing these and finishing implementing the <none> window -> where no robot window exists
+
+Week 13:
+
+Webots:
+Finished Robot Controller and Window specification modifications
+  - void to generic
+  - empty to none
+  - changed default values
+  - modified documentations/change log and protos accordingly
+  - merged and related issue has been Closed
+
+Webots Cloud:
+Fixed problems with css
+  - white space underneath simulations/animations in some cases -> fixed by creating a scrollable body inside the normal body
+  - fixed toolbar on mobile view
+  - merged to beta
+
+Webots Cloud/JS mix:
+Started investigation how to implement different versions of webots
+  - Wanted to allow users to run simulations using previous versions of webots
+  - Modifications in webotsJS and webots for R2022b lead to textures not being applied correctly
+  - Previously: Webots version was added to x3d file
+  - Idea: get the version -> have the version in the URL -> use the correct webotsJS files
+  - Problem: webotsJS creates a custom "webots-view" element -> once created it cannot be modified
+  - The solution I found so far: force refresh the page before loading and running a simulation after reading the version
+  - Not the best I think
+
+Webots Cloud/Webots mix:
+  - Noticed that when uploading to webots cloud from webots -> it didnt go to local storage or get associated with an account
+  - Right now: animations is directly uploaded to database from Webots -> link is created -> if link clicked it opens webots.cloud
+  - Because it uploads directly to database -> can't get username and password
+  - Idea: add hidden message in header/url link that says this upload 
+  -> problem, user has to click on the link for it to be associated to the accoundt
+  - Tried different approaches:
+    - Webots cloud opens browser and checks if logged in when finishing upload -> not great because always opens browser,
+      if connected to different browser...
+    - Adding a webots.cloud dialog that can be accessed the menu bar or when uploading a scene/simulation
+    - On upload, it checks if signed in, if not a window pops up and suggests it (with don't remind me again)
+    - Account information is saved, and user can also sign up to webots cloud here
+    - This links webots and webots cloud so uploads will be easier
+
+
+Week 14:
+
+Webots Cloud:
+Add Webots Release:
+  - It was not possible to run scenes/animations/simulations with different WebotsJS Releases
+  - Due to custom "Webots-View" Element being created, that could not be changed once defined.
+  - Fixed -> Loads webotsJS release files and creates custom element when loading a simulation/animation
+  - If different release, refreshes page on load -> seamless transitioning
+  - For animations/scenes, when being loaded, release is read while listing the simulation (directly from database, .php file)
+  - For simulations, the realease is embedded in the url as a query string (before the github link)
+  - Merged and works well
+Local storage fixed
+  - Added a modal when uploads were associated with webots.cloud account
+  - Deleted files from local storage if they were deleted on webots.cloud
+
+Webots Cloud/Webots:
+Associate webots uplaods with webots.cloud account
+  - When an upload is finished, a message appears on screen saying "make sure to open in browser to associate upload"
+  - If the button is clicked: a query string is sent with url
+  - On webots.cloud, if url has query string -> adds to local storage or associates with account -> loads simulation with normal url
+  - Slight security issue -> but worse that can happen is that someone takes over an anonymous simulation
+  - It is impossible to steal someone elses animation/scene
+Add an "uploading" status
+  - Cancel button during sharing to webots.cloud on webots was not working
+  - connected the button so that it aborts all http requests
+  - Problem: some files were partially uplaoded and already set in the database
+  - animation/scene table of database -> added a new column named "uploading" which has a default value of 1
+  - Webots sends a POST request and uploads files to database
+  - once a reply is received on webots -> a new request is sent to change the "uploading" value in the database to 0
+  - In webots cloud, only files with an "uploading" value of 0 are shown
+  - If the "uploading" value is 1, and still in the database for over 1 day -> it is deleted.
+  - This also prevents uploads when webots crashes or is killed
+
+  -> this needs to be added to uploads directly from webots.cloud
+
+Leave on friday and monday
+
+
+Supervisor export image function
+
+
+Week 15:
+
+Webots:
+Merged improvement to the share to webots cloud feature
+  - Users can now easily link their animation/scene uploads to their webots cloud account -> closes the issue that was opened
+  - Updated the dialog with a simple button and text description
+  - Fixed cancel button so it works correctly with what I implemented the previous week
+
+Webots cloud:
+  - Created a few animations and scenes to make it look more complete
+  - Fixed bug a modal that was not closing after uplaoding an animation or scene
+  - Added automatic host selection to webots cloud -> so it knows to run simulations with the correct host (beta, testing or master)
+
+Webots JS:
+Improving the progress bar/loading screen
+  - Added an image to the background while loading that fades in and moves slightly ->
+  - Need to find a way to take an image/add image when uploading to webots cloud (hidden file?)
+  - Continued to improve progress bar -> still having problems with asynchronous functions and promises
+    -> DOM elements do not update, so trying to find a work around.
+
+
+Week 16:
+
+Main task -> finish loading screen/progress bar
+Description:
+  - Loading screen with a webots release panel on the left corresponding to the version
+  - Background with either a default scene if none is saved/found
+  - Or background corresponding to the simulation/animation
+  - On top of background we have the usual progress bar in multiple steps -> beginning of this week I will test if one long one, or if add "Step 2/4"...
+
+Screenshot:
+  - When a world is saved, a screenshot is taken (a hidden .jpg file)
+  - When a world is uplaoded to webots.cloud -> screenshot is added to temporary file (with x3d and json) and deleted locally once uplaoded
+  - Screenshot is then uploaded to server storage and can be accessed easily through the its url (as it is the same as the animation url)
+  - For simulations, it is also easy to find the url as it is in the same place as the .wbproj file -> can use rawgithubusercontent
+
+Things to do:
+  - Right now it takes a screenshot of the current view -> want to normalize/find a consistent size -> this depends on user screen size
+  - Haven't figured out how to resize the window correctly to take a screenshot -> kept on taking pictures during transitioning
+  - Figure out how to upload thumbnail when uploading files directly from a local directory to webots cloud via the websites interface
+
+
+
+Week 17:
+
+Webots:
+Loading Screen:
+  - Main focus of the week: Taking and saving the screenshot
+  - Chose size for thumbnial: 16:9 format (to match most screens) of 768px by 432px 
+  - Wanted the screenshot to be "Realistic" -> no optional renderings or overlays
+  - For overlays and most optional renderings, they are disabled but not "unchecked" in the menu -> their state can be restored
+  - Except for solid specific optional renderings (center of mass and buoyancy)
+    -> here we need to look through the scene tree and save each state if is "checked" or not before resizing, 
+       and restore according to the saved state before restoring the webots 3d View
+  - These two tasks took some time because it was my first time getting familiar with all of these webots mechanisms
+  - Selected a default loading image -> ennlarged the background to fit 16:9 format.
+  - Deleted unnecessary icon files
+  - Created PR 
+  - Screenshot was working on Linux but not on Windows -> Olivier fixed it -> not tested on match
+  - Redesigned the loading screen -> just CSS changes -> looks better
+
+Webots Cloud:
+  - Created draft PR to send the correct thumbnails to webots -> to be merged after previous PR
+  - Added some coding style changes to Benjamins PR -> waiting to test
+
+This week:
+Webots-cloud bugs to fix:
+  - Pagination, which is using the total number of simulations on the server rather than the ones that are fully uploaded
+  - Fix "Illegal" characters display such as the Apostrophe
+
+Webots bugs to fix:
+  - When recording an animation -> if the simulation is restared during recording -> sharing is cancelled with no warning
+
+WebotsJS:
+  - Only load webotsJS window when needed -> Try to optimize
+
+
+
+Week 18:
+
+Webots:
+  - Finished correcting Loading Page and Progress Bar -> Merged (finally)
+  - Latest changes: message modifications, change a few functions for backward compatibility.
+  - Fixed issue where a lot of error messages were appearing when uploading to cloud -> Sends an extra signal when thumbnail is saved rather than taken
+    -> still had some issues -> so now when listing the files to be uploaded, if it does not find one straight away -> it waits 100ms and looks again 
+    -> loops 10 times -> this happens for .json, .x3d and .thumbnail files, but not the textures as they should already exist
+  - Added thumbnail optionality to the preferences, so the user can decide if they don't want the thumbnails to be taken
+  - Updated documentation for the preferences
+  - Tested the new thumbnail mechanism on Mac works well but noticed some layout changes -> fixed and merged
+
+
+WebotsJS:
+  - Finished correcting Loading Page and Progress Bar -> Merged (finally)
+  - Quick fix for the Web animation/scene viewer -> wasn't opening new tab correctly -> merged
+  - Noticed bug of elevation grid bounding object display -> fixed by Benjamin -> merged
+  - Fixed the start time of web animations -> before the Json file time started at the webots clock time -> now starts at zero -> merged
+  - Noticed bug this morning -> images and textures are not loading correctly (using local path for url, not githubrawusercontent)...
+
+
+Webots Cloud:
+  - Did some updates and merged Benjamin's PR for coding style -> fixes all JS and PHP files
+  - Implemented the changes with the new thumbnails to webots.cloud -> can now upload a thumbnail jpg file on the website
+  - Webots.cloud now shows a preview of the animation/scene or simulation with the description on hover
+    All merged to beta
+
+Other: Out of office on friday
+
+
+Week 19:
+
+Webots Cloud:
+  - tested on iOS to see if floating windows were working and the toolbar was not resizing well for mobile devices
+  - iOS, macOS and safari don't support the "screen" interface, but only the "window" interface which is deprecated
+    -> had to implement a special case if the device is iOS or safari$
+  - Also fixed some UX issues to to allow for better use of the webots 3d window zoom and navigation properties
+    -> disabled zoom on mobile browser
+  - Started reorganizing the webots-cloud/webotsJS documentation to have it all in one place
+
+Webots:
+  - my computer wasn't working after updating and changing some settings with the nVidia drivers, so that took a morning to fix.
+  - Tested the Debian and snap packages and noticed some issues that are all in the spreadsheet.
+  - Started trying to fix some issues with the robot windows, after Stefania noticed that PROTO specific windows are not opening
+    in worlds where there plugin is not defined in the project folder
+  - Started some tests on macOS -> will continue today
+  
+
+Week 20:
+
+Webots:
+  - Lots of tests on macOS -> lots of problems with new file architecture that includes the Contents path
+    - Controllers in "Objects" did not were not working
+    - Compilation path was not correct -> modify all of the makefiles
+    - DarwinOP motion path was wrong
+    - Vehicle library path was also wrong
+    - Problems with the SUMO importer -> updateed and updated documentation
+
+  - Fixed some issues with the Crazyflie web component
+    - Was not showing up on the documentation -> x3d and json files were missing
+    - Added them with the script
+    - Checked with kim if all was in order
+
+  - Updated Webots cloud and Web server documentation
+    - Almost done -> just need a description of webots.cloud
+
+  - Testing on debian, and mac packages
+
+Webots-cloud
+  - Added new button/page for terms of use
+
+
+Week 21:
+
+Webots Cloud:
+  - Published version 1.0 of Webots cloud -> working
+  - Updated and merged documentation for webots.cloud and web servers
+  - Added terms of Service and Privacy Policy -> did some minor corrections and improved the footer layout on webots.cloud
+  - Bug with scroll that was introduced when we changed the scrollable body of webots cloud
+    -> links to new pages of website were not scrolled to top
+  - Introducing a "SORT BY", "SEARCH" and "MY PROJECTS" to webots cloud -> nearly done
+
+Webots:
+  - Left and right sound was inverted -> rotation matrix of the listener was wrong and had a negative sign -> quick fix
+  - Lots of testing -> It seems there is only one bug left on Ubuntu 20 -> Daniel is fixing it
+
+
+Week 22:
+
+Webots-cloud:
+  - Yannick adding new simulation template for webots cloud -> found some errors
+  - Temp file path where the github files are stored was not the same as the project instance path where the simulation server was looking
+    -> error was "file was missing" but it was really the wrong file path
+    -> if webots project file was at the root of a none default branch on github -> not found
+  - Simulation server was only accepting .yml files -> added .yaml extension
+  - Updated the default docker name on simulation server
+  - Updated webots cloud documentation to clear up some confusions
+    -> details on the publish variable, dockerfile and compilation, and ide paths and limitations
+  - Added search and sort bar -> first had a search bar and a sort button next to it -> could lead to confusion
+    -> removed the sort button and added clickable titles that would sort by them Investigated
+    -> Merged
+  - Started creating a "my projects" page where users can view their projects, and some information (stats)
+
+RobotBenchmark:
+  - Started a new github page with a new version of robotbenchmark
+  - Have a repo with all of the benchmarks, updated with externproto, all working except viewpoint control -> look much better than before
+  - Started investigating the scoring mechanism -> limited info because I only partially had access to an old clone of robotbenchmark
+  - Investigated darkos github actions
+  - Investigated and got it working on localhost (but lost progress) to a github OAth App -> allows to log in with github
+    -> easy to create an account -> have better access to public repos
+
+Out of office from thursday
+
+
+Week 23:
+
+Webots:
+  - For webotsJS most protos did not have visible "window" field -> added one so we can select <none> if it doesn't want to be shown
+  - Updated robotbenchmark repositories (for robotbenchmark website) accordingly
+
+Webots-Cloud:
+  - On simulation synchronisation, the php file would list all of the simulations again and reload the pagination
+    -> if a search was being performed, it was not being taken into account and the pagination was off
+  - When loading server page without loading one of the other 3 pages first -> bug
+  - This morning investigation mistakes in history
+
+RobotBenchmark:
+  - Continue developing the website on github pages
+  - Logging in with github is working
+  - Navigating and investigating the github authorizations API to see what information we can get/use
+
+
+Week 24:
+
+WebotsJS:
+  - modifying floating windows, so the latest one you click on comes to the top (not merged)
+  - modifying floating windows for benchmarks, if benchmark -> they have a different layout
+
+Webots:
+  - Investigating local url problems with Daniel -> You were discussing this morning
+
+Webots Cloud:
+  - Finished "My Projects" page -> working well, looks cool -> lots of new and repeated code so cleanup and discussion
+
+Robobenchmark:
+  - Continuing investigation -> Using the API if you are logged in, you have access to all of your repos (private and public)
+  - Continuing metrics implementation
+  - Continuing development of website, routes, pages, navigation, etc.
+
+
+Week 26:
+
+WebotsJS:
+  - Update floating windows: layering by modifying z-index on selection.
+  - Main window (or world info window) is now being considered and is larger on top left when defined
+  - IDE is in center and on top
+  - Update pointer events when moving a floating window to avoid getting stuck
+  - Slight css mods bluring the background so you can see things better
+
+Robobenchmark:
+  - Continued with website and experimenting with github API
+  - Slight problems with CORS erros when using code to Logging -> will try making requests on the server
+
+WebotsJS/Robotbenchmark:
+  - Creating a benchmark format (and then a template) that is compatible with webotsJS
+  - This would allow people to create benchmarks in a better way
+  - Linked with webots.js so that once the benchmark is completed, it is shown and your performance is also shown
+  - On robotbenchmark this performance is then saved
+  - Not done, but my current task
+
+Docker:
+  - None of the docker images were working
+  - Problem of nvidia driver version was different on server than in docker
+  - updated them on both simgait and cyberbotics1 servers
+
+Writing report:
+  - divided into 4 sub-parts webots, webotsJS, webots.cloud, and robotbenchmark
+
+Off on friday and next monday
